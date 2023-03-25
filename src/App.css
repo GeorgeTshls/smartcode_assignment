@@ -1,38 +1,118 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
+  justify-content: center;
   flex-direction: column;
+}
+
+.header_cont{
+  display: flex;
+  align-self: center;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width:100%;
 }
 
-.App-link {
-  color: #61dafb;
+.header_title{
+  font-family: 'Calibri';
+  font-weight: 500;
+  font-size: 2em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.userlist_cont{
+  list-style-type: none;
+  padding:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.userlist_cont li{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw;
+  padding-bottom: 1em;
+  border-bottom: 2px solid black;
+  margin-bottom: 5vh;
+}
+
+.userlist_cont li div{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.userlist_text{
+  font-family: 'Calibri';
+  font-size: 1em;
+  margin: .25em 0;
+}
+
+.trash_icon{
+  font-size: 1.5em;
+  padding: .33em;
+  border-radius: 50%;
+  border:2px solid black;
+}
+
+.plus_icon{
+  font-size: 2em;
+  cursor: pointer;
+  margin-left: 5vw;
+  z-index: 10;
+}
+
+#calendar_cont{
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  opacity:0;
+  transition: all ease-in-out .3s;
+}
+
+#main{
+  transition: all ease-in-out .3s;
+}
+
+.row_cont{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin:2vh 0;
+}
+
+.row_cont button{
+  background-color: white;
+  border:none;
+  box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.75);
+  font-size: 1.25em;
+  margin-right: 5vw;
+}
+
+.input_cont p{
+  font-family: 'Calibri';
+  font-size: 1em;
+  margin-bottom: 0;
+  margin-right: 10vw;
+}
+
+.input_cont input{
+  font-family: 'Calibri';
+  font-size: 1em;
+}
+
+#nights{
+  border: 2px solid black;
+  width:40vw;
+  height:1.5em;
+  margin-left: 10vw;
+  padding-left:1em;
 }
