@@ -2,12 +2,12 @@ import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import { useRef, useState } from 'react';
-import $ from 'jquery';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { differenceInDays } from 'date-fns';
 import moment from 'moment/moment';
+import axios from 'axios';
 
 function App() {
 
@@ -44,7 +44,7 @@ function App() {
     return (
       <ul className='userlist_cont' id='userlist'>
         {users && users?.length > 0 && users?.map(user => (
-          <li>
+          <li key={user?.email}>
             <div>
               <p className='userlist_text'>{user.name}</p>
               <p className='userlist_text'>{user.email}</p>
@@ -78,25 +78,31 @@ function App() {
   }
 
   function addUser(){
+    let check=true;
+    users?.forEach((usr)=>{
+      if(usr?.name === name) check=false;
+    })
+
+    if(!check){
+      window.alert('Reservation on this name already exists!')
+    }
+
     if(name !== '' && nights>0){
-      $.ajax({
-        url: 'https://randomuser.me/api/?results=1',
-        dataType: 'json',
-        success: (data) => {
-          let arr = users;
-          arr.push({
-            'name':name,
-            'checkout':selection.endDate,
-            'checkin':selection.startDate,
-            'email':data?.results[0]?.email
-          })
-          setUsers(arr)
-          closeCalendar();
-        },
-        error: (xhr, status, error) => {
-          window.alert(error);
-          closeCalendar();
-        },
+      axios.get('https://randomuser.me/api/?results=1')
+      .then((response) => {
+        let arr = users;
+        arr.push({
+          name: name,
+          checkout: selection.endDate,
+          checkin: selection.startDate,
+          email: response.data.results[0]?.email,
+        });
+        setUsers(arr);
+        closeCalendar();
+      })
+      .catch((error) => {
+        window.alert(error.message);
+        closeCalendar();
       });
 
     }else{
