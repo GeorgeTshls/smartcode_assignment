@@ -85,6 +85,7 @@ function App() {
 
     if(!check){
       window.alert('Reservation on this name already exists!')
+      return;
     }
 
     if(name !== '' && nights>0){
